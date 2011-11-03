@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class ScalabilityTesting {
 
 	public static double run(Object scalabilityTestingObject, String methodName, Object... params)
-			throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+			throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		
 		Method method = searchMethodWithScalabilityTestingAnnotation(methodName, scalabilityTestingObject);
 		int times = getNumberOfTimesToExecute(method);
@@ -18,7 +18,7 @@ public class ScalabilityTesting {
 
 	@SuppressWarnings("rawtypes")
 	private static Method searchMethodWithScalabilityTestingAnnotation(String methodName,
-			Object scalabilityTestingObject) {
+			Object scalabilityTestingObject) throws NoSuchMethodException {
 		Class scalabilityTestingClass = scalabilityTestingObject.getClass();
 		Method scalabilityTestingMethod = null;
 		for (Method method : scalabilityTestingClass.getDeclaredMethods()) {
@@ -26,6 +26,10 @@ public class ScalabilityTesting {
 				scalabilityTestingMethod = method;
 			}
 		}
+		if(scalabilityTestingMethod == null)
+			throw new NoSuchMethodException("Method " + methodName + " does not exist");
+		if(!scalabilityTestingMethod.isAnnotationPresent(ScalabilityTest.class))
+			throw new NoSuchMethodException("Method " + methodName + "without annotation ScalabilityTest");
 		return scalabilityTestingMethod;
 	}
 
@@ -47,9 +51,10 @@ public class ScalabilityTesting {
 		return total / times;
 	}
 
-	private static Integer invokeMethodWithParamsUpdated(Object scalabilityTestingObject, Method method,
+	private static Double invokeMethodWithParamsUpdated(Object scalabilityTestingObject, Method method,
 			Object[] actualParams) throws IllegalAccessException, InvocationTargetException {
-		return (Integer) method.invoke(scalabilityTestingObject, actualParams);
+		Number value = (Number) method.invoke(scalabilityTestingObject, actualParams);
+		return value.doubleValue();
 	}
 
 	private static void sumEachParamOfParamsArray(Method method, Object[] actualParams, Object... params) {

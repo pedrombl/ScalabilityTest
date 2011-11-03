@@ -1,7 +1,6 @@
 package eu.choreos;
 
 import static eu.choreos.ScalabilityTesting.run;
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
@@ -33,8 +32,23 @@ public class ScalabilityTestingTest {
 	}
 	
 	@Test
-	public void shouldnExecuteMethodIfHasNoParameterWithScaleAnnotation() throws Exception {
-		run(sumCount, "withoutScaleParameter", 1);
+	public void shouldReceiveAsReturnADoubleValue() throws Exception {
+		assertEquals(15.0/5, run(sumCount, "countReturningDouble", 1), EPSILON);
+	}
+	
+	@Test
+	public void shouldExecuteMethodIfHasNoParameterWithScaleAnnotation() throws Exception {
+		assertEquals(1.0, run(sumCount, "withoutScaleParameter", 1), EPSILON);
+	}
+	
+	@Test(expected=NoSuchMethodException.class)
+	public void shouldNotExecuteMethodWithoutScalabilityTestAnnotation() throws Exception {
+		run(sumCount, "withoutScalabilityTestAnnotation", 1);
+	}
+	
+	@Test(expected=NoSuchMethodException.class)
+	public void shouldThrowNoSuchMethodExceptionIfMethodDoesNotExists() throws Exception {
+		run(sumCount, "methodDoesNotExists");
 	}
 
 }
