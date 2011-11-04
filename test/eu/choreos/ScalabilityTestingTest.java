@@ -50,5 +50,16 @@ public class ScalabilityTestingTest {
 	public void shouldThrowNoSuchMethodExceptionIfMethodDoesNotExists() throws Exception {
 		run(sumCount, "methodDoesNotExists");
 	}
+	
+	@Test
+	public void shouldIncreaseExponentially() throws Exception {
+		assertEquals(31.0/5, run(sumCount, "countExponential", 1), EPSILON);
+	}
+	
+	@Test
+	public void shouldIncreaseQuadratically() throws Exception {
+		assertEquals(55.0/5, run(sumCount, "countQuadratic", 1), EPSILON);
+
+	}
 
 }

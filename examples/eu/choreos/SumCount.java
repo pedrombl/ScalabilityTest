@@ -31,5 +31,15 @@ public class SumCount {
 		double total = 1.0*number;
 		return total;
 	}
+	
+	@ScalabilityTest(scalabilityFunction=ExponentialIncrease.class, maxIncreaseTimes=5)
+	public double countExponential(@Scale int number) {
+		return number;
+	}
+	
+	@ScalabilityTest(scalabilityFunction=QuadraticIncrease.class, maxIncreaseTimes=5)
+	public double countQuadratic(@Scale int number) {
+		return number;
+	}
 
 }

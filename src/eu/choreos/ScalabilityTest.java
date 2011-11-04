@@ -9,6 +9,6 @@ import java.lang.annotation.ElementType;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ScalabilityTest {
-	String scalabilityFunction() default "linear";
+	Class<? extends ScalabilityFunction> scalabilityFunction() default LinearIncrease.class;
 	int maxIncreaseTimes();
 }
