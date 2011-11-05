@@ -8,12 +8,12 @@ public class SumCount {
 	}
 	
 	@ScalabilityTest(maxIncreaseTimes=5)
-	public int sumBothAndCount(@Scale int a, @Scale int b) {
+	public int sumBoth(@Scale int a, @Scale int b) {
 		return a+b;
 	}
 	
 	@ScalabilityTest(maxIncreaseTimes=5)
-	public int sumBothMultipleAndCount(@Scale int a, @Scale int b, int multiply) {
+	public int sumBothAndMultiple(@Scale int a, @Scale int b, int multiply) {
 		return multiply*(a+b);
 	}
 	

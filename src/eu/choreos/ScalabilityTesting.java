@@ -9,27 +9,28 @@ public class ScalabilityTesting {
 	private static ScalabilityFunction function;
 	private static int times;
 	private static ScalabilityTestMethod method;
+	private static ScalabilityReport report;
 
-	public static double run(Object scalabilityTests, String methodName, Object... params)
+	public static ScalabilityReport run(Object scalabilityTests, String methodName, Object... params)
 			throws NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException,
 			InstantiationException {
-
 		method = new ScalabilityTestMethod(scalabilityTests, methodName);
 		function = method.getScalabilityFunctionObject();
 		times = method.getNumberOfTimesToExecute();
-		return executeIncreasingParams(scalabilityTests, params);
+		report = new ScalabilityReport(methodName, times);
+		executeIncreasingParams(scalabilityTests, params);
+		return report;
 	}
 
-	public static double executeIncreasingParams(Object scalabilityTestingObject, Object... params)
+	public static void executeIncreasingParams(Object scalabilityTestingObject, Object... params)
 			throws IllegalAccessException, InvocationTargetException, InstantiationException {
-		double total = 0.0;
 		Object[] actualParams = Arrays.copyOf(params, params.length);
 		Annotation[][] parametersAnnotation = method.getParameterAnnotations();
 		for (int i = 0; i < times; i++) {
-			total += invokeMethodWithParamsUpdated(scalabilityTestingObject, actualParams);
+			double value = invokeMethodWithParamsUpdated(scalabilityTestingObject, actualParams);
+			report.add(i+1, value);
 			increaseEachParamOfParamsArray(actualParams, parametersAnnotation, params);
 		}
-		return total / times;
 	}
 
 	private static Double invokeMethodWithParamsUpdated(Object scalabilityTestingObject, Object[] actualParams) throws IllegalAccessException, InvocationTargetException {
