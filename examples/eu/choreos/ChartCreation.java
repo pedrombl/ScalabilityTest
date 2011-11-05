@@ -1,35 +1,36 @@
 package eu.choreos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import eu.choreos.chart.ScalabilityReportChart;
 
 
+
 public class ChartCreation {
-	public static void countChart() throws Exception {
+	public static ScalabilityReport countChart() throws Exception {
 		SumCount sumCount = new SumCount();
-		ScalabilityReport report = ScalabilityTesting.run(sumCount, "count", 1);
-		ScalabilityReportChart chart = new ScalabilityReportChart();
-		chart.createChart(report);
+		return ScalabilityTesting.run(sumCount, "count", 1);
 	}
 	
-	public static void sumBothChart() throws Exception {
+	public static ScalabilityReport sumBothChart() throws Exception {
 		SumCount sumCount = new SumCount();
-		ScalabilityReport report = ScalabilityTesting.run(sumCount, "sumBoth", 1, 2);
-		ScalabilityReportChart chart = new ScalabilityReportChart();
-		chart.createChart(report);
+		return ScalabilityTesting.run(sumCount, "sumBoth", 1, 2);	
 	}
 	
 	
-	public static void withoutScaleParameterChart() throws Exception {
+	public static ScalabilityReport withoutScaleParameterChart() throws Exception {
 		SumCount sumCount = new SumCount();
-		ScalabilityReport report = ScalabilityTesting.run(sumCount, "withoutScaleParameter", 2);
-		ScalabilityReportChart chart = new ScalabilityReportChart();
-		chart.createChart(report);
+		return ScalabilityTesting.run(sumCount, "withoutScaleParameter", 2);
 	}
 	
 	
 	public static void main(String[] args) throws Exception {
-		countChart();
-		sumBothChart();
-		withoutScaleParameterChart();
+		List<ScalabilityReport> reports = new ArrayList<ScalabilityReport>();
+		reports.add(countChart());
+		reports.add(sumBothChart());
+		reports.add(withoutScaleParameterChart());
+		ScalabilityReportChart chart = new ScalabilityReportChart();
+		chart.createChart(reports);
 	}
 }
