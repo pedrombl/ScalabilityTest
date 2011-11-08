@@ -19,10 +19,9 @@ public class ScalabilityTestingTest {
 	@Test
 	public void shouldIncreaseTheNumberParameterAndReturnReport() throws Exception {
 		ScalabilityReport report = run(sumCount, "count", 1);
-		double[][] series = report.getSeries();
+		double[] series = report.getSeries();
 		for(int i=1; i<=5; i++) {
-			assertEquals((double) i, series[0][i], EPSILON);
-			assertEquals((double) i, series[1][i], EPSILON);
+			assertEquals((double) i, series[i], EPSILON);
 		}
 		assertEquals("count", report.getName());
 	}
@@ -31,10 +30,9 @@ public class ScalabilityTestingTest {
 	@Test
 	public void shouldIncreaseTheNumberOfBothParameters() throws Exception {
 		ScalabilityReport report = run(sumCount, "sumBoth", 1, 2);
-		double[][] series = report.getSeries();
+		double[] series = report.getSeries();
 		for(int i=1; i<=5; i++) {
-			assertEquals((double) i, series[0][i], EPSILON);
-			assertEquals(i*(1.0+2.0), series[1][i], EPSILON);
+			assertEquals(i*(1.0+2.0), series[i], EPSILON);
 		}
 		assertEquals("sumBoth", report.getName());
 	}
@@ -42,10 +40,9 @@ public class ScalabilityTestingTest {
 	@Test
 	public void shouldIncreaseTheNumberOfParametersWithAnnotationScale() throws Exception {
 		ScalabilityReport report =  run(sumCount, "sumBothAndMultiple", 1, 2, 10);
-		double[][] series = report.getSeries();
+		double[] series = report.getSeries();
 		for(int i=1; i<=5; i++) {
-			assertEquals((double) i, series[0][i], EPSILON);
-			assertEquals(i*10*(1.0+2.0), series[1][i], EPSILON);
+			assertEquals(i*10*(1.0+2.0), series[i], EPSILON);
 		}
 		assertEquals("sumBothAndMultiple", report.getName());
 	}
@@ -54,10 +51,9 @@ public class ScalabilityTestingTest {
 	@Test
 	public void shouldReceiveAsReturnADoubleValue() throws Exception {		
 		ScalabilityReport report = run(sumCount, "countReturningDouble", 1);
-		double[][] series = report.getSeries();
+		double[] series = report.getSeries();
 		for(int i=1; i<=5; i++) {
-			assertEquals((double) i, series[0][i], EPSILON);
-			assertEquals((double) i, series[1][i], EPSILON);
+			assertEquals((double) i, series[i], EPSILON);
 		}
 		assertEquals("countReturningDouble", report.getName());
 	}
@@ -65,10 +61,9 @@ public class ScalabilityTestingTest {
 	@Test
 	public void shouldExecuteMethodIfHasNoParameterWithScaleAnnotation() throws Exception {
 		ScalabilityReport report = run(sumCount, "withoutScaleParameter", 1);
-		double[][] series = report.getSeries();
+		double[] series = report.getSeries();
 		for(int i=1; i<=5; i++) {
-			assertEquals((double) i, series[0][i], EPSILON);
-			assertEquals(1.0, series[1][i], EPSILON);
+			assertEquals(1.0, series[i], EPSILON);
 		}
 		assertEquals("withoutScaleParameter", report.getName());
 	}
@@ -88,11 +83,10 @@ public class ScalabilityTestingTest {
 	@Test
 	public void shouldIncreaseExponentially() throws Exception {	
 		ScalabilityReport report = run(sumCount, "countExponential", 1);
-		double[][] series = report.getSeries();
+		double[] series = report.getSeries();
 		int value = 1;
 		for(int i=1; i<=5; i++) {
-			assertEquals((double) i, series[0][i], EPSILON);
-			assertEquals((double) value, series[1][i], EPSILON);
+			assertEquals((double) value, series[i], EPSILON);
 			value*=2;
 		}
 		assertEquals("countExponential", report.getName());
@@ -103,10 +97,9 @@ public class ScalabilityTestingTest {
 	@Test
 	public void shouldIncreaseQuadratically() throws Exception {
 		ScalabilityReport report = run(sumCount, "countQuadratic", 1);
-		double[][] series = report.getSeries();
+		double[] series = report.getSeries();
 		for(int i=1; i<=5; i++) {
-			assertEquals((double) i, series[0][i], EPSILON);
-			assertEquals((double) (i*i), series[1][i], EPSILON);
+			assertEquals((double) (i*i), series[i], EPSILON);
 		}
 		assertEquals("countQuadratic", report.getName());
 	}

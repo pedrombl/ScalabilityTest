@@ -4,14 +4,14 @@ public class ScalabilityReport {
 
 
 	private String methodName;
-	private double[][] series;
+	private double[] series;
 
 	public ScalabilityReport(String methodName, int times) {
 		this.methodName = methodName;
-		series = new double[2][times+1];
+		series = new double[times+1];
 	}
 
-	public double[][] getSeries() {
+	public double[] getSeries() {
 		return series;
 	}
 
@@ -21,8 +21,7 @@ public class ScalabilityReport {
 	}
 
 	public void add(int i, double value) {
-		series[0][i] = i;
-		series[1][i] = value;
+		series[i] = value;
 	}
 
 }
