@@ -1,4 +1,4 @@
-package eu.choreos;
+package eu.choreos.increasefunctions;
 
 public class ExponentialIncrease extends ScalabilityFunction {
 

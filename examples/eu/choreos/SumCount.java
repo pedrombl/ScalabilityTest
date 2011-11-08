@@ -1,5 +1,10 @@
 package eu.choreos;
 
+import eu.choreos.annotations.ScalabilityTest;
+import eu.choreos.annotations.Scale;
+import eu.choreos.increasefunctions.ExponentialIncrease;
+import eu.choreos.increasefunctions.QuadraticIncrease;
+
 public class SumCount {
 	
 	@ScalabilityTest(maxIncreaseTimes=5)

@@ -1,4 +1,4 @@
-package eu.choreos;
+package eu.choreos.increasefunctions;
 
 public class QuadraticIncrease extends ScalabilityFunction {
 	

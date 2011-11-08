@@ -4,6 +4,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
+import eu.choreos.annotations.Scale;
+import eu.choreos.increasefunctions.ScalabilityFunction;
+
 public class ScalabilityTesting {
 
 	private static ScalabilityFunction function;

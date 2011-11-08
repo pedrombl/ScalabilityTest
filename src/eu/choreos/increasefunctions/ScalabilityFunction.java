@@ -1,4 +1,4 @@
-package eu.choreos;
+package eu.choreos.increasefunctions;
 
 
 public abstract class ScalabilityFunction {

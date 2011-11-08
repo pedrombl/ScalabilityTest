@@ -1,4 +1,4 @@
-package eu.choreos;
+package eu.choreos.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
